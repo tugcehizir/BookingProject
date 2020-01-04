@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var hotelModel = require('../model/Hotel');
+
+var userModel = require('./../model/User');
 router.route('/')
     .get(function (req, res, next) {
-        hotelModel.find({})
+        userModel.find({})
             .then((data) => {
                 console.log(data);
                 res.status(200).json({
@@ -17,7 +18,7 @@ router.route('/')
             })
 
     }).post(function (req, res, next) {
-        hotelModel.create(req.body, (err, data) => {
+        userModel.create(req.body, (err, data) => {
             console.log(data);
             console.log(err);
         })
