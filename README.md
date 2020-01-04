@@ -1,2 +1,0 @@
-# BookingProject
-Full Stack 
