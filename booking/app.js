@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors')
 
 var mongoose = require('mongoose');
 var indexRouter = require('./routes/index');
@@ -10,6 +11,8 @@ var usersRouter = require('./routes/users');
 var hotelRouter = require('./routes/hotel');
 var userRouter = require('./routes/user');
 var app = express();
+
+app.use(cors())
 
 mongoose.connect('mongodb://localhost/Booking', { useNewUrlParser: true });
 
