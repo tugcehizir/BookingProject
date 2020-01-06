@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var hotelModel = require('../model/Hotel');
+
 router.route('/api/getData')
     .get(function (req, res, next) {
         hotelModel.find({})
@@ -16,7 +17,7 @@ router.route('/api/getData')
             })
 
     })
-    router.route('/api/postData')
+router.route('/api/postData')
     .post(function (req, res, next) {
         hotelModel.create(req.body, (err, data) => {
             console.log(data);
@@ -24,7 +25,5 @@ router.route('/api/getData')
         })
         res.status(201).json(req.body);
     })
-
-
 
 module.exports = router;

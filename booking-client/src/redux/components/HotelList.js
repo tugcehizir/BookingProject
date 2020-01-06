@@ -10,7 +10,7 @@ const HotelList = ({ hotelsThis }) => {
                     <div className="row no-gutters">
                         <div className="col-md-4">
                             <img src={item.imageUrl} alt="foto" className="card-img"></img>
-                            </div>
+                        </div>
                         <div className="col-md-8">
                             <div className="card-body">
                                 <h5 className="card-title">{item.name}</h5>
@@ -27,7 +27,7 @@ const HotelList = ({ hotelsThis }) => {
 
 const mapStateToProps = (state) => {
     return {
-        hotelsThis: state.app.hotels
+        hotelsThis: state.app.selectedHotels
     };
 }
 
