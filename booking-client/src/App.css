@@ -7,9 +7,18 @@
   height: 40vmin;
   pointer-events: none;
 }
-.SearchBar{
-margin-bottom: 20px;
-}
 .container{
   width: 600px;
+}
+.search{
+  width: 600px;
+  margin: 20px auto;
+}
+.stars{
+  width: 25px;
+}
+.img-fluid{
+  margin-top: 25px;
+  margin-bottom: 15px;
+  width: 400px;
 }

@@ -1,12 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter, useHistory } from 'react-router-dom';
+
 const HotelList = ({ hotelsThis }) => {
-    //hotelsThis.map(item => ()
-    console.log(hotelsThis);
+    const history = useHistory();
+    
+    const _onClick = id => {
+        history.push({pathname: '/detail', state: {hotelId: id}}); //Bu fonksiyona verilen path'e yönlendirir.
+    }
     return (
         <div className="container">
             {hotelsThis.map(item => (
-                <div className="card mb-3" key={item._id}>
+                <div className="card mb-3" key={item._id} onClick={() => _onClick(item._id)}>
                     <div className="row no-gutters">
                         <div className="col-md-4">
                             <img src={item.imageUrl} alt="foto" className="card-img"></img>
@@ -32,4 +37,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps)(HotelList);
+export default withRouter(connect(mapStateToProps)(HotelList));
