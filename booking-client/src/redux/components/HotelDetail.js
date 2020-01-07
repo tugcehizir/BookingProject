@@ -19,7 +19,7 @@ const HotelDetail = ({ location }) => {
         <div>
             <Header name={selectedHotel[0].name} />
             <Star number={selectedHotel[0].star} />
-            <img src={selectedHotel[0].imageUrl} className="img-fluid" alt="Responsive image"></img>
+            <img src={selectedHotel[0].imageUrl} className="img-fluid" alt="Hotel"></img>
             <p>{selectedHotel[0].adress}<mark>{selectedHotel[0].city}</mark></p>
             <div className="alert alert-light" role="alert">
             {selectedHotel[0].description}
