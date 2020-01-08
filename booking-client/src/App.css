@@ -20,8 +20,12 @@
 .img-fluid{
   margin-top: 25px;
   margin-bottom: 15px;
-  width: 400px;
+  width: 250px;
 }
 a {
   color: red;
+}
+.detail{
+  width: 600px;
+  margin: 20px auto;
 }

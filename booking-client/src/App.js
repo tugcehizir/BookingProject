@@ -25,7 +25,6 @@ function App() {
           <Route exact path="/">
             <Header name={'Booking Clone Home Page'} />
             <HomePage />
-            <HotelList/>
           </Route>
           <Route exact path="/search">
           <Header name={'Booking Clone Search Page'} />
@@ -37,6 +36,9 @@ function App() {
           </Route>
           <Route path="/login" component={HotelDetail}>
           <Header name={'Login Page'} />
+          </Route>
+          <Route path="/room" component={HotelDetail}>
+          <Header name={'Room Page'} />
           </Route>
         </Switch>
       </div>

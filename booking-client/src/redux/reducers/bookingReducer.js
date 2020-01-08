@@ -2,7 +2,8 @@
 const initialState = {
     hotels: [],
     request: false,
-    selectedHotels: []
+    selectedHotels: [],
+    rooms: []
 };
 
 export default (state = initialState, action) => {

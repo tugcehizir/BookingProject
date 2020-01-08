@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-var userModel = require('./../model/User');
+var roomModel = require('./../model/Room');
 router.route('/api/getData')
     .get(function (req, res, next) {
-        userModel.find({})
+        roomModel.find({})
             .then((data) => {
                 console.log(data);
                 res.status(200).json({
@@ -18,9 +18,10 @@ router.route('/api/getData')
             })
 
     })
+
 router.route('/api/postData')
     .post(function (req, res, next) {
-        userModel.create(req.body, (err, data) => {
+        roomModel.create(req.body, (err, data) => {
             console.log(data);
             console.log(err);
         })

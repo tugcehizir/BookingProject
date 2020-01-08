@@ -24,7 +24,7 @@ const SearchBar = ({ hotels }) => {
     const _handleClick = async () => {
 
         const selectedHotels = hotels.filter(hotels => {
-            return hotels.city === currentValue;
+            return hotels.country === currentValue;
         });
         console.log(selectedHotels);
         dispatch({ type: 'selectedHotel/success', data: selectedHotels });

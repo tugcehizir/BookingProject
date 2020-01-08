@@ -38,8 +38,8 @@ const HomePage = ({ hotels }) => {
                         <div className="col-md-8">
                             <div className="card-body">
                                 <h5 className="card-title">{item.name}</h5>
-                                <p className="card-text">{item.description}</p>
-                                <p className="card-text"><small className="text-muted">{item.city}</small></p>
+                                <p className="card-text">{item.info}</p>
+                                <p className="card-text"><small className="text-muted">{item.country}</small></p>
                             </div>
                         </div>
                     </div>
