@@ -12,7 +12,7 @@ const NavBar = () => {
                     <a className="nav-link" href='/search'>Arama </a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href='/login'>Üye Girişi</a>
+                    <a className="nav-link" href='/rezervation'>Rezervasyonlar</a>
                 </li>
                 
             </ul>

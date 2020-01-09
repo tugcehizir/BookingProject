@@ -8,7 +8,7 @@ import HotelList from './redux/components/HotelList';
 import HotelDetail from './redux/components/HotelDetail';
 import NavBar from './redux/components/NavBar';
 import HomePage from './redux/components/HomePage';
-
+import RezervationPage from './redux/components/RezervationPage';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -20,25 +20,22 @@ function App() {
   return (
     <Router>
       <div className="App">
-          <NavBar />
+        <NavBar />
         <Switch>
           <Route exact path="/">
-            <Header name={'Booking Clone Home Page'} />
+            <Header name={'Booking Clone'} />
             <HomePage />
           </Route>
           <Route exact path="/search">
-          <Header name={'Booking Clone Search Page'} />
+            <Header name={'Hotel Search Page'} />
             <SearchBar />
-            <HotelList/>
+            <HotelList />
           </Route>
           <Route path="/detail" component={HotelDetail}>
-            <HotelDetail />
           </Route>
-          <Route path="/login" component={HotelDetail}>
-          <Header name={'Login Page'} />
-          </Route>
-          <Route path="/room" component={HotelDetail}>
-          <Header name={'Room Page'} />
+          <Route path="/rezervation">
+            <Header name={'Rezervation Page'} />
+            <RezervationPage/>
           </Route>
         </Switch>
       </div>

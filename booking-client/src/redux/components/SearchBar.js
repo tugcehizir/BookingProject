@@ -3,6 +3,7 @@ import { useDispatch, connect } from 'react-redux';
 
 const SearchBar = ({ hotels }) => {
     const [currentValue, setCurrentValue] = useState("");
+    const [currentSelect, setCurrentSelect] = useState("");
     const dispatch = useDispatch();
     useEffect(() => {
         async function fetchData() {
@@ -24,26 +25,43 @@ const SearchBar = ({ hotels }) => {
     const _handleClick = async () => {
 
         const selectedHotels = hotels.filter(hotels => {
-            return hotels.country === currentValue;
+
+            return hotels.country === currentSelect;
         });
         console.log(selectedHotels);
         dispatch({ type: 'selectedHotel/success', data: selectedHotels });
-
+        
     };
 
     const _handleChange = event => {
+
         setCurrentValue(event.target.value);
-        console.log(currentValue);
+        change(currentValue); //en yakın seçenek getirildi.
+        _handleClick();
     }
 
+    const change = (currentValue) => {
+        console.log(currentValue)
+    
+        const array = [];
+        for (let i = 0; i < hotels.length; i++) {
+            array.push(hotels[i].country);
+        }
+
+        for (let j = 0; j < array.length; j++) {
+            const string = array[j]
+            const obj = string.includes(currentValue);
+            if (obj === true && currentValue !== "") {
+                setCurrentSelect(array[j]);
+                console.log(currentSelect)
+            }
+        }
+    }
 
     return (
         <div className="search">
             <div className="input-group mb-3">
-                <input onChange={_handleChange} className="form-control" placeholder="Kalmak istediğiniz şehri seçin!" aria-describedby="button-addon2" />
-                <div className="input-group-append">
-                    <button onClick={_handleClick} className="btn btn-outline-secondary" type="button" id="button-addon2">Tıkla</button>
-                </div>
+                <input onChange={_handleChange} className="form-control" placeholder="Kalmak istediğiniz ülkeyi giriniz." aria-describedby="button-addon2" />
             </div>
         </div>
     )
