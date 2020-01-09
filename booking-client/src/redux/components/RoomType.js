@@ -1,30 +1,45 @@
 import React from 'react';
-const RoomType = prop => {
-    const hotels = [prop];
-    console.log(hotels);
+import { connect } from 'react-redux'
+import { useHistory, withRouter } from 'react-router-dom';
+
+const RoomType = room => {
+    console.log(room);
+    const rooms = [room.room];
+    const history = useHistory();
+    const _onClick = id => {
+        console.log("Burası id", id)
+        history.push({ pathname: '/rezervation', state: { roomId: id } }); //Bu fonksiyona verilen path'e yönlendirir.
+
+    }
     return (
         <div>
-            {hotels.map(item => (
-                <div key={item.prop._id}>
-                    {item.prop.room.map(obj => (
-                        <div className="card mb-3" key={obj.code}>
-                        <div className="row no-gutters">
-                            <div className="col-md-4">
-                                <img src={obj.imageUrl} alt="foto" className="card-img"></img>
-                            </div>
-                            <div className="col-md-8">
-                                <div className="card-body">
-                                    <h5 className="card-title">{obj.name}</h5>
-                                    <p className="card-text">{obj.description}</p>
-                                    <p className="card-text"><small className="text-muted">Tek gecelik fiyat:{obj.price}TL</small></p>
+            <div>
+                {rooms.map(item => (
+                    <div key={item} >
+                        {item.map(obj => (
+                            <div className="card mb-3" key={obj.code} onClick={() => _onClick(obj._id)}>
+                                <div className="row no-gutters">
+                                    <div className="col-md-4">
+                                        <img src={obj.imageUrl} alt="foto" className="card-img"></img>
+                                    </div>
+                                    <div className="col-md-8">
+                                        <div className="card-body">
+                                            <h5 className="card-title">{obj.name}</h5>
+                                            <p className="card-text">{obj.description}</p>
+                                            <p className="card-text"><small className="text-muted">Tek gecelik fiyat:{obj.price}TL</small></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        ))}
                     </div>
-                    ))}
-                </div>
-            ))}
-        </div>
+                ))}
+            </div> </div>
     )
 };
-export default RoomType;
+const mapStateToProps = (state) => {
+    return {
+        room: state.app.rooms
+    };
+}
+export default withRouter(connect(mapStateToProps)(RoomType));
