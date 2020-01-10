@@ -2,7 +2,6 @@
   text-align: center;
   margin-top: 20px;
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -28,4 +27,26 @@ a {
 .detail{
   width: 600px;
   margin: 20px auto;
+}
+.form-control{
+  width: 350px;
+  margin: 0 auto;
+}
+.datePick{
+  margin-bottom: 20px;
+}
+.left{
+  float: left;
+}
+.right{
+float: right;
+}
+.cont-rez{
+  margin-left: 400px;
+  margin-right: 500px;
+}
+.secondPick{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  
 }
