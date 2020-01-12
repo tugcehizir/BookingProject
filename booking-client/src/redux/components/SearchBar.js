@@ -30,7 +30,7 @@ const SearchBar = ({ hotels }) => {
         });
         console.log(selectedHotels);
         dispatch({ type: 'selectedHotel/success', data: selectedHotels });
-        
+
     };
 
     const _handleChange = event => {
@@ -42,7 +42,7 @@ const SearchBar = ({ hotels }) => {
 
     const change = (currentValue) => {
         console.log(currentValue)
-    
+
         const array = [];
         for (let i = 0; i < hotels.length; i++) {
             array.push(hotels[i].country);

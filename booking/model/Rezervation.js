@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Room = require('./Room');
 
-module.exports = new mongoose.model('Rezervation', mongoose.Schema({
+const RezervationSchema = new mongoose.Schema({
   checkInDate: Date,
   checkOutDate: Date,
   userName: String,
@@ -9,5 +9,6 @@ module.exports = new mongoose.model('Rezervation', mongoose.Schema({
   phoneNumber: Number,
   numberOfPerson: Number,
   room: [Room.schema]
-}));
+});
 
+module.exports = mongoose.model("Rezervation", RezervationSchema)

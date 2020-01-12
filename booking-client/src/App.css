@@ -2,51 +2,68 @@
   text-align: center;
   margin-top: 20px;
 }
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-.container{
+
+.container {
   width: 600px;
 }
-.search{
+
+.search {
   width: 600px;
   margin: 20px auto;
 }
-.stars{
+
+.stars {
   width: 25px;
 }
-.img-fluid{
+
+.img-fluid {
   margin-top: 25px;
   margin-bottom: 15px;
   width: 250px;
 }
+
 a {
   color: red;
 }
-.detail{
+
+.detail {
   width: 600px;
   margin: 20px auto;
 }
-.form-control{
+
+.form-control {
   width: 350px;
   margin: 0 auto;
 }
-.datePick{
+
+.datePick {
   margin-bottom: 20px;
 }
-.left{
+
+.left {
   float: left;
 }
-.right{
-float: right;
+
+.right {
+  float: right;
 }
-.cont-rez{
-  margin-left: 400px;
-  margin-right: 500px;
+
+.container-rez {
+  width: 600px;
+  margin: 0 auto;
 }
-.secondPick{
+
+.secondPick {
   margin-top: 20px;
   margin-bottom: 20px;
-  
+}
+
+.result {
+  margin-top: 20px;
+  width: 200px;
 }

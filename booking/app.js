@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors')
 
+const bodyParser = require("body-parser");
+
 var mongoose = require('mongoose');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -16,7 +18,18 @@ var app = express();
 
 app.use(cors())
 
-mongoose.connect('mongodb://localhost/Booking', { useNewUrlParser: true });
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+mongoose.connect('mongodb://localhost/Booking', {
+  useNewUrlParser: true, useCreateIndex: true,
+  useUnifiedTopology: true
+}, (err) => {
+  if (!err) {
+    console.log('MongoDB Connection Succeeded.')
+  } else {
+    console.log('Error in DB connection: ' + err)
+  }
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
