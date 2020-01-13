@@ -8,7 +8,7 @@ const RoomType = room => {
     const history = useHistory();
     const _onClick = id => {
         console.log("Burası id", id)
-        history.push({ pathname: '/rezervation', state: { roomId: id } }); //Bu fonksiyona verilen path'e yönlendirir.
+        history.push({ pathname: '/form', state: { roomId: id } }); //Bu fonksiyona verilen path'e yönlendirir.
 
     }
     return (

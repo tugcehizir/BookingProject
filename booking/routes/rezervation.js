@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-var { Rezervation } = require("./../controller/RezervationController");
 var rezervationModel = require('./../model/Rezervation');
+
 router.route('/api/getData')
     .get(function (req, res, next) {
         rezervationModel.find({})
@@ -19,27 +19,32 @@ router.route('/api/getData')
 
     })
 
-router.post("/api/createRezervation", (request, response, next) => {
-    const rezervation = Rezervation(request.body);
-    rezervation.save()
-        .then(rezervation => {
-            return response.status(201).send({
-                status: "success",
-                data: rezervation
-            });
+router.route('/api/createRezervation')
+    .post(function (req, res, next) {
+        rezervationModel.create(req.body, (err, data) => {
+            console.log(data);
+            console.log(err);
         })
-        .catch(err => {
-            return response.status(400).send({
-                status: "fail",
-                data: {
-                    error: err.message,
-                    errorMessage: "Yanlis bilgiler"
-                }
-            });
-        });
-});
-
-
-
+        res.status(201).json(req.body);
+    })
+// router.post("/api/createRezervation", (request, response, next) => {
+//     const rezervation = Rezervation(request.body);
+//     rezervation.save()
+//         .then(rezervation => {
+//             return response.status(201).send({
+//                 status: "success",
+//                 data: rezervation
+//             });
+//         })
+//         .catch(err => {
+//             return response.status(400).send({
+//                 status: "fail",
+//                 data: {
+//                     error: err.message,
+//                     errorMessage: "Yanlis bilgiler"
+//                 }
+//             });
+//         });
+// });
 
 module.exports = router;
