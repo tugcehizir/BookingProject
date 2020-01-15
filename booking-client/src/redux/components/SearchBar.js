@@ -61,7 +61,7 @@ const SearchBar = ({ hotels }) => {
     return (
         <div className="search">
             <div className="input-group mb-3">
-                <input onChange={_handleChange} className="form-control" placeholder="Kalmak istediğiniz ülkeyi giriniz." aria-describedby="button-addon2" />
+                <input onChange={_handleChange} className="form-control" placeholder="Hangi ülkeyi ziyaret etmek istersiniz?" aria-describedby="button-addon2" />
             </div>
         </div>
     )

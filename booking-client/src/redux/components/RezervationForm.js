@@ -1,14 +1,19 @@
 import React, { useState, useRef } from 'react';
 import { useSelector } from 'react-redux'
-import { withRouter } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 import DatePicker from "react-datepicker"
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
+import uuid from 'react-uuid'
 
 const RezervationForm = ({ location }) => {
-    const [startDate, setStartDate] = useState(new Date("2020/01/01"));
-    const [endDate, setEndDate] = useState(new Date("2020/01/02"));
+    const history = useHistory();
+
+    const [startDate, setStartDate] = useState(new Date("2020-01-01T00:00:00Z"));
+    const [endDate, setEndDate] = useState(new Date("2020-01-01T00:00:00Z"));
     const [success, setSuccess] = useState();
+
+    const [data, setdata] = useState();
 
     let userName = useRef();
     let userMail = useRef();
@@ -29,6 +34,7 @@ const RezervationForm = ({ location }) => {
     const [phone, setPhone] = useState();
     const [person, setNumberOfPerson] = useState();
 
+
     const handleChange = () => {
         setUserName(userName.current.value);
         setNumberOfPerson(numberOfPerson.current.value);
@@ -36,13 +42,13 @@ const RezervationForm = ({ location }) => {
         setUserMail(userMail.current.value);
     }
 
-    const [data, setdata] = useState();
-
     const handleSubmit = event => {
-
         event.preventDefault();
+        const uniqueCode = uuid();
+        const rezervationCode = uniqueCode.split("-")
         axios
             .post("http://localhost:3000/rezervation/api/createRezervation", {
+                rezervationCode: rezervationCode[0],
                 checkInDate: startDate,
                 checkOutDate: endDate,
                 userName: name,
@@ -54,113 +60,115 @@ const RezervationForm = ({ location }) => {
             .then(({ data }) => {
                 setdata(data);
                 setSuccess(true);
+                history.push({ pathname: '/thanks', state: { rezCode: rezervationCode[0] } });
             })
             .catch(err => {
                 setSuccess(false);
                 console.log(err);
             });
-        console.log(success);
-        console.log(data);
+            console.log(data);
     }
-
     return (
         <div className="container-rez">
             <p>Rezervasyon yapmak istediğiniz oda <mark>{selectedRoom[0].name}</mark></p>
-            <div className="left">
-                <div className="form-group">
-                    <label htmlFor="formGroupExampleInput">Adınız:</label>
-                    <input
-                        type="text"
-                        className="form-control is-invalid"
-                        id="formGroupExampleInput"
-                        placeholder="Adınız"
-                        name="userName"
-                        key="ad"
-                        ref={userName}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="formGroupExampleInput3">Mail Adresiniz</label>
-                    <input
-                        type="text"
-                        className="form-control is-invalid"
-                        id="formGroupExampleInput3"
-                        placeholder="Mail Adresiniz"
-                        name="userMail"
-                        key="mail"
-                        ref={userMail}
-                        onChange={handleChange}
-                        required />
+            <form onSubmit={handleSubmit}>
+                <div className="left">
+                    <div className="form-group">
+                        <label htmlFor="formGroupExampleInput">Adınız:</label>
+                        <input
+                            type="text"
+                            className="form-control is-invalid"
+                            id="formGroupExampleInput"
+                            placeholder="Adınız"
+                            name="userName"
+                            key="ad"
+                            pattern="[A-Za-z]+"
+                            minLength="6"
+                            maxLength="25"
+                            ref={userName}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="formGroupExampleInput3">Mail Adresiniz</label>
+                        <input
+                            type="email"
+                            className="form-control is-invalid"
+                            id="formGroupExampleInput3"
+                            placeholder="Mail Adresiniz"
+                            name="userMail"
+                            key="mail"
+                            ref={userMail}
+                            onChange={handleChange}
+                            required />
 
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="formGroupExampleInput4">Telefon Numaranız</label>
+                        <input
+                            type="text"
+                            className="form-control is-invalid"
+                            id="formGroupExampleInput4"
+                            placeholder="Telefon Numaranız"
+                            name="phoneNumber"
+                            key="phone"
+                            pattern="[0-9]+"
+                            minLength="10"
+                            maxLength="11"
+                            ref={phoneNumber}
+                            onChange={handleChange}
+                            required />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="formGroupExampleInput5">Kişi Sayısı</label>
+                        <input
+                            type="number"
+                            className="form-control is-invalid"
+                            id="formGroupExampleInput5"
+                            placeholder="Kişi Sayısı"
+                            name="numberOfPerson"
+                            key="person"
+                            ref={numberOfPerson}
+                            onChange={handleChange}
+                            required />
+                    </div>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="formGroupExampleInput4">Telefon Numaranız</label>
-                    <input
-                        type="text"
-                        className="form-control is-invalid"
-                        id="formGroupExampleInput4"
-                        placeholder="Telefon Numaranız"
-                        name="phoneNumber"
-                        key="phone"
-                        ref={phoneNumber}
-                        onChange={handleChange}
-                        required />
+                <div className="right">
+                    <div className="datePick">
+                        <p>Giriş Tarihinizi Seçiniz.</p>
+                        <DatePicker
+                            selected={startDate}
+                            onChange={date => setStartDate(date)}
+                            selectsStart
+                            startDate={startDate}
+                            endDate={endDate}
+                        />
+                        <p className="secondPick">Çıkış Tarihinizi Seçiniz. </p>
+                        <DatePicker
+                            selected={endDate}
+                            onChange={date => setEndDate(date)}
+                            selectsEnd
+                            startDate={startDate}
+                            endDate={endDate}
+                            minDate={startDate}
+                        />
+                    </div>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="formGroupExampleInput5">Kişi Sayısı</label>
-                    <input
-                        type="number"
-                        className="form-control is-invalid"
-                        id="formGroupExampleInput5"
-                        placeholder="Kişi Sayısı"
-                        name="numberOfPerson"
-                        key="person"
-                        ref={numberOfPerson}
-                        onChange={handleChange}
-                        required />
-                </div>
-            </div>
-            <div className="right">
-                <div className="datePick">
-                    <p>Giriş Tarihinizi Seçiniz.</p>
-                    <DatePicker
-                        selected={startDate}
-                        onChange={date => setStartDate(date)}
-                        selectsStart
-                        startDate={startDate}
-                        endDate={endDate}
-                    />
-                    <p className="secondPick">Çıkış Tarihinizi Seçiniz. </p>
-                    <DatePicker
-                        selected={endDate}
-                        onChange={date => setEndDate(date)}
-                        selectsEnd
-                        startDate={startDate}
-                        endDate={endDate}
-                        minDate={startDate}
-                    />
-                </div>
-                <button onClick={handleSubmit} className="btn btn-danger">Oluştur</button>
-                <div className="result">
-                    {
-                        (success === true)
-                            ? (<div class="alert alert-success" role="alert">
-                                Rezervasyon bilgileriniz oluşturuldu!
-                                Görüntülemek için <mark><a href="/rezervation">Rezervasyonlar</a></mark> sayfasına gidiniz.</div>)
-                            : <div></div>
-                    }
-                    {
-                        (success === false)
-                            ? (
-                                <div class="alert alert-danger" role="alert">
-                                    Rezervasyon oluşturma hatası!
+                <input type="submit" value="Gönder" />
+            </form>
+
+            <div className="result">
+                {
+                    (success === false)
+                        ? (
+                            <div class="alert alert-danger" role="alert">
+                                Rezervasyon oluşturma hatası!
                             Lütfen tekrar deneyin!</div>)
-                            : <div></div>
-                    }
-                </div>
+                        : <div></div>
+                }
             </div>
+
         </div>
     )
 

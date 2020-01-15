@@ -24,7 +24,8 @@
 .img-fluid {
   margin-top: 25px;
   margin-bottom: 15px;
-  width: 250px;
+  width: 220px;
+  display: inline-block;
 }
 
 a {
@@ -67,4 +68,5 @@ a {
 .result {
   margin-top: 20px;
   width: 200px;
+  float: right;
 }

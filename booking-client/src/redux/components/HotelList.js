@@ -2,15 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, useHistory } from 'react-router-dom';
 
-const HotelList = ({ hotelsThis }) => {
+const HotelList = ({ selectedCountry }) => {
     const history = useHistory();
     const _onClick = id => {
-        history.push({pathname: '/detail', state: {hotelId: id}}); //Bu fonksiyona verilen path'e yönlendirir.
+        history.push({ pathname: '/detail', state: { hotelId: id } }); //Bu fonksiyona verilen path'e yönlendirir.
     }
-    
+
     return (
         <div className="container">
-            {hotelsThis.map(item => (
+            {selectedCountry.map(item => (
                 <div className="card mb-3" key={item._id} onClick={() => _onClick(item._id)}>
                     <div className="row no-gutters">
                         <div className="col-md-4">
@@ -32,7 +32,7 @@ const HotelList = ({ hotelsThis }) => {
 
 const mapStateToProps = (state) => {
     return {
-        hotelsThis: state.app.selectedHotels
+        selectedCountry: state.app.selectedHotels
     };
 }
 

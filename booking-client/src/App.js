@@ -16,6 +16,7 @@ import NavBar from './redux/components/NavBar';
 import HomePage from './redux/components/HomePage';
 import RezervationForm from './redux/components/RezervationForm';
 import RezervationPage from './redux/components/RezervationPage';
+import ThanksPage from './redux/components/ThanksPage';
 
 function App() {
   return (
@@ -25,22 +26,25 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Header name={'Booking Clone'} />
-            <HomePage />
-          </Route>
-          <Route exact path="/search">
-            <Header name={'Hotel Search Page'} />
             <SearchBar />
             <HotelList />
+          </Route>
+          <Route path="hotels">
+            <HomePage />
           </Route>
           <Route path="/detail" component={HotelDetail}>
           </Route>
           <Route path="/form">
-            <Header name={'Rezervation Form'} />
+            <Header name={'Rezervasyon'} />
             <RezervationForm />
           </Route>
           <Route path="/rezervation">
-            <Header name={'Rezervations'} />
+            <Header name={'Rezervasyon Bilgileri'} />
             <RezervationPage />
+          </Route>
+          <Route path="/thanks" component={ThanksPage}>
+          </Route>
+          <Route path="/user">
           </Route>
         </Switch>
       </div>

@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Room = require('./Room');
 
 module.exports = new mongoose.model('Rezervation', mongoose.Schema({
+  rezervationCode: String,
   checkInDate: Date,
   checkOutDate: Date,
   userName: {
