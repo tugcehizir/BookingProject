@@ -9,9 +9,11 @@ const NavBar = () => {
                     <a className="nav-link active" href='/'>Ana Sayfa</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href='/rezervation'>Rezervasyonlar</a>
+                    <a className="nav-link" href='/rezervation'>Rezervasyon İşlemleri</a>
                 </li>
-                
+                <li className="nav-item">
+                    <a className="nav-link" href='/login'>Üye Girişi</a>
+                </li>
             </ul>
         </div>
     )

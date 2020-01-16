@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 .App-logo {
@@ -69,4 +69,12 @@ a {
   margin-top: 20px;
   width: 200px;
   float: right;
+}
+.card{
+  width: 500px;
+  margin: 15px auto;
+}
+.alert-success{
+  width: 500px;
+  margin: 0 auto;
 }

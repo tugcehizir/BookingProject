@@ -17,6 +17,7 @@ import HomePage from './redux/components/HomePage';
 import RezervationForm from './redux/components/RezervationForm';
 import RezervationPage from './redux/components/RezervationPage';
 import ThanksPage from './redux/components/ThanksPage';
+import RezervationQuery from './redux/components/RezervationQuery';
 
 function App() {
   return (
@@ -38,9 +39,12 @@ function App() {
             <Header name={'Rezervasyon'} />
             <RezervationForm />
           </Route>
-          <Route path="/rezervation">
+          <Route path="/rezervations">
             <Header name={'Rezervasyon Bilgileri'} />
             <RezervationPage />
+          </Route>
+          <Route path="/rezervation">
+            <RezervationQuery />
           </Route>
           <Route path="/thanks" component={ThanksPage}>
           </Route>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import Header from "./Header";
+import RezervationCard from "./RezervationCard";
 
 const ThanksPage = ({ location }) => {
 
@@ -29,19 +29,22 @@ const ThanksPage = ({ location }) => {
         }
         fetchData();
     }, []);
-
+    
     return (
         <div>
             {rezervationCheck !== undefined ?
-                <div>  
-                    <Header name={`Bizi tercih ettiğiniz için teşekkür ederiz.`} />
-                    {rezervationCheck[0].userName}
-
+                <div>
+                    <div class="alert alert-success" role="alert">
+                        Bizi tercih ettiğiniz için teşekkür ederiz.
+                            <br />
+                        <cite>Tekrar görüşmek dileğiyle..</cite>
+                    </div>
+                    <RezervationCard prop={rezervationCheck[0]}/>
+                    <div class="alert alert-light" role="alert">
+                        <cite> Rezervasyon kodunuzu lütfen saklayın.</cite>
+                    </div>
 
                 </div>
-
-
-
                 : <div>LOADING</div>
             }
 
