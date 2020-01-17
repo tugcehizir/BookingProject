@@ -14,10 +14,10 @@ import HotelList from './redux/components/Other/HotelList';
 import HotelDetail from './redux/components/HotelDetail';
 import NavBar from './redux/components/NavBar';
 import HomePage from './redux/components/HomePage';
-import RezervationForm from './redux/components/RezervationForm';
-import RezervationPage from './redux/components/Other/RezervationPage';
+import ReservationForm from './redux/components/ReservationForm';
+import ReservationPage from './redux/components/Other/ReservationPage';
 import ThanksPage from './redux/components/ThanksPage';
-import RezervationQuery from './redux/components/RezervationQuery';
+import ReservationQuery from './redux/components/ReservationQuery';
 import User from './redux/components/User';
 
 function App() {
@@ -38,14 +38,14 @@ function App() {
           </Route>
           <Route path="/form">
             <Header name={'Rezervasyon'} />
-            <RezervationForm />
+            <ReservationForm />
           </Route>
-          <Route path="/rezervations">
+          <Route path="/reservations">
             <Header name={'Rezervasyon Bilgileri'} />
-            <RezervationPage />
+            <ReservationPage />
           </Route>
-          <Route path="/rezervation">
-            <RezervationQuery />
+          <Route path="/reservation">
+            <ReservationQuery />
           </Route>
           <Route path="/thanks" component={ThanksPage}>
           </Route>

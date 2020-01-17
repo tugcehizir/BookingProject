@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 var Room = require('./Room');
 
-module.exports = new mongoose.model('Rezervation', mongoose.Schema({
-  rezervationCode: String,
+module.exports = new mongoose.model('Reservation', mongoose.Schema({
+  resCode: String,
   checkInDate: Date,
   checkOutDate: Date,
   userName: {

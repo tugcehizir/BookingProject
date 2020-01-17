@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import RezervationDelete from "./RezervationDelete";
-import RezervationUpdate from "./RezervationUpdate";
+import ReservationDelete from "./ReservationDelete";
+import ReservationUpdate from "./ReservationUpdate";
 
 import { withRouter } from 'react-router-dom';
-const RezervationCard = card => {
+const ReservationCard = card => {
     console.log(card.prop)
     const [deleteMethod, setDeleteMethod] = useState("");
     const [updateMethod, setUpdateMethod] = useState("");
@@ -27,7 +27,7 @@ const RezervationCard = card => {
         <div className="card-cont" >
             <div className="card" style={{display: showCard ? 'block' : 'none' }}>
                 <div className="card-body">
-                    <h5 className="card-title">Rezervasyon Kodu: {card.prop.rezervationCode}</h5>
+                    <h5 className="card-title">Rezervasyon Kodu: {card.prop.resCode}</h5>
 
                     <h6 className="card-subtitle mb-2 text-muted">Rezervasyon Sahibi: {card.prop.userName}</h6>
                     <p className="card-text">Kişi Sayısı: {card.prop.numberOfPerson}</p>
@@ -38,10 +38,10 @@ const RezervationCard = card => {
                     </div>
                 </div>
             </div>
-            {deleteMethod ? <div style={{display: showAlert ? 'block' : 'none' }}><RezervationDelete prop={card} /></div> : <div></div>}
-            {updateMethod ? <div style={{display: showForm ? 'block' : 'none' }}><RezervationUpdate prop={card.prop} /></div> : <div></div>}
+            {deleteMethod ? <div style={{display: showAlert ? 'block' : 'none' }}><ReservationDelete prop={card} /></div> : <div></div>}
+            {updateMethod ? <div style={{display: showForm ? 'block' : 'none' }}><ReservationUpdate prop={card.prop} /></div> : <div></div>}
         </div>
     )
 
 }
-export default withRouter(RezervationCard);
+export default withRouter(ReservationCard);

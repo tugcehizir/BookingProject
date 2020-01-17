@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import RezervationCard from "./RezervationCard";
+import ReservationCard from "./ReservationCard";
 
 const ThanksPage = ({ location }) => {
 
-    const [rezervate, setRezervate] = useState();
+    const [reservate, setReservate] = useState();
 
-    const rez = [rezervate];
+    const res = [reservate];
 
-    if (rez[0] !== undefined) {
-        var rezervationCheck = rez[0].data.filter(item => {
-            if (item.rezervationCode === location.state.rezCode) {
+    if (res[0] !== undefined) {
+        var reservationCheck = res[0].data.filter(item => {
+            if (item.resCode === location.state.resCode) {
                 return true;
             }
             return false;
         })
     }
-    console.log(rezervationCheck)
+    console.log(reservationCheck)
     useEffect(() => {
         async function fetchData() {
             try {
-                const result = await fetch(`http://localhost:3000/rezervation/api/getData`)
-                setRezervate(await result.json());
+                const result = await fetch(`http://localhost:3000/reservation/api/getData`)
+                setReservate(await result.json());
             }
             catch (error) {
                 console.log(error);
@@ -32,14 +32,14 @@ const ThanksPage = ({ location }) => {
 
     return (
         <div>
-            {rezervationCheck !== undefined ?
+            {reservationCheck !== undefined ?
                 <div>
                     <div class="alert alert-success" role="alert">
                         Bizi tercih ettiğiniz için teşekkür ederiz.
                             <br />
                         <cite>Tekrar görüşmek dileğiyle..</cite>
                     </div>
-                    <RezervationCard prop={rezervationCheck[0]} />
+                    <ReservationCard prop={reservationCheck[0]} />
 
 
                 </div>

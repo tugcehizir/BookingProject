@@ -4,8 +4,8 @@ const initialState = {
     request: false,
     selectedHotels: [],
     rooms: [],
-    rezervation: [],
-    selectedRezerve: []
+    reservation: [],
+    selectedReserve: []
 };
 
 export default (state = initialState, action) => {
@@ -18,10 +18,10 @@ export default (state = initialState, action) => {
             return { ...state, selectedHotels: action.data };
         case 'room/success':
             return { ...state, rooms: action.data };
-        case 'rezervation/success':
-            return { ...state, rezervation: action.data };
-        case 'selectedRezerve/success':
-            return { ...state, selectedRezerve: action.data };
+        case 'reservation/success':
+            return { ...state, reservation: action.data };
+        case 'selectedReserve/success':
+            return { ...state, selectedReserve: action.data };
         default:
             return state;
     }

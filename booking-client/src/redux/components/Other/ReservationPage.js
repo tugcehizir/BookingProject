@@ -2,16 +2,16 @@ import React, { useEffect } from 'react'
 import { useDispatch, connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-const RezervationPage = ({ rezervation }) => {
+const ReservationPage = ({ reservation }) => {
     const dispatch = useDispatch();
     useEffect(() => {
         async function fetchData() {
             try {
-                const result = await fetch(`http://localhost:3000/rezervation/api/getData`)
+                const result = await fetch(`http://localhost:3000/reservation/api/getData`)
                 console.log(result);
                 const res = await result.json();
 
-                dispatch({ type: 'rezervation/success', data: res.data });
+                dispatch({ type: 'reservation/success', data: res.data });
             }
             catch (error) {
                 console.log(error);
@@ -20,14 +20,14 @@ const RezervationPage = ({ rezervation }) => {
         fetchData();
     }, [dispatch]);
     //onClick={() => _onClick(item._id)}
-    console.log(rezervation);
+    console.log(reservation);
 
     const getPrice = (person, price) => {
         return person * price
     }
     return (
         <div className="container">
-            {rezervation.map(item => (
+            {reservation.map(item => (
                 <div className="card mb-3" key={item._id} >
                     <div className="row no-gutters">
                         <div className="col-md-4">
@@ -50,8 +50,8 @@ const RezervationPage = ({ rezervation }) => {
 };
 const mapStateToProps = (state) => {
     return {
-        rezervation: state.app.rezervation
+        reservation: state.app.reservation
     };
 }
 
-export default withRouter(connect(mapStateToProps)(RezervationPage));
+export default withRouter(connect(mapStateToProps)(ReservationPage));

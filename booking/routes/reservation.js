@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-var rezervationModel = require('./../model/Rezervation');
+var reservationModel = require('../model/Reservation');
 
 router.route('/api/getData')
     .get(function (req, res, next) {
-        rezervationModel.find({})
+        reservationModel.find({})
             .then((data) => {
                 res.status(200).json({
                     status: 200,
@@ -19,21 +19,21 @@ router.route('/api/getData')
 
     })
 
-router.route('/api/createRezervation')
+router.route('/api/createReservation')
     .post(function (req, res, next) {
-        rezervationModel.create(req.body, (err, data) => {
+        reservationModel.create(req.body, (err, data) => {
             console.log(data);
             console.log(err);
         })
         res.status(201).json(req.body);
     })
-// router.post("/api/createRezervation", (request, response, next) => {
-//     const rezervation = Rezervation(request.body);
-//     rezervation.save()
-//         .then(rezervation => {
+// router.post("/api/createReservation", (request, response, next) => {
+//     const reservation = Reservation(request.body);
+//     reservation.save()
+//         .then(reservation => {
 //             return response.status(201).send({
 //                 status: "success",
-//                 data: rezervation
+//                 data: reservation
 //             });
 //         })
 //         .catch(err => {
@@ -47,22 +47,22 @@ router.route('/api/createRezervation')
 //         });
 // });
 // Update Student
-router.route('/api/updateRezervation/:id')
+router.route('/api/updateReservation/:id')
 .put((req, res, next) => {
-    rezervationModel.findByIdAndUpdate(req.params.id, {
+    reservationModel.findByIdAndUpdate(req.params.id, {
       $set: req.body
     }, (error, data) => {
       if (error) {
         return next(error);
       } else {
         res.json(data)
-        console.log('Rezervation updated successfully !')
+        console.log('Reservation updated successfully !')
       }
     })
   })
-router.route('/api/deleteRezervation/:id')
+router.route('/api/deleteReservation/:id')
 .delete((req, res, next) => {
-    rezervationModel.findByIdAndRemove(req.params.id, (error, data) => {
+    reservationModel.findByIdAndRemove(req.params.id, (error, data) => {
       if (error) {
         return next(error);
       } else {

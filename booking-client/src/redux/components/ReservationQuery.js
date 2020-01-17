@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, connect } from 'react-redux';
-import RezervationCard from "./RezervationCard";
+import ReservationCard from "./ReservationCard";
 
-const RezervationQuery = ({ rezervation }) => {
-    console.log(rezervation);
+const ReservationQuery = ({ reservation }) => {
+    console.log(reservation);
     const dispatch = useDispatch();
 
     const [currentValue, setCurrentValue] = useState("");
@@ -13,10 +13,10 @@ const RezervationQuery = ({ rezervation }) => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const result = await fetch(`http://localhost:3000/rezervation/api/getData`)
+                const result = await fetch(`http://localhost:3000/reservation/api/getData`)
                 console.log(result);
                 const res = await result.json();
-                dispatch({ type: 'selectedRezerve/success', data: res.data });
+                dispatch({ type: 'selectedReserve/success', data: res.data });
             }
             catch (error) {
                 console.log(error);
@@ -28,8 +28,8 @@ const RezervationQuery = ({ rezervation }) => {
     const handleChange = event => {
         setCurrentValue(currentCode.current.value);
     }
-    var selectedCode = rezervation.filter(obj => {
-        return obj.rezervationCode === currentValue;
+    var selectedCode = reservation.filter(obj => {
+        return obj.resCode === currentValue;
     });
     const handleClick = event => {
         event.preventDefault();
@@ -41,7 +41,7 @@ const RezervationQuery = ({ rezervation }) => {
                 <input onChange={handleChange} ref={currentCode} className="form-control" placeholder="Rezervasyon kodunuzu girin." aria-describedby="button-addon2" />
                 <button onClick={handleClick} type="button" className="btn btn-outline-danger">Göster</button>
                 {selectedCode[0] !== undefined ?
-                    <RezervationCard prop={selectedCode[0]} />
+                    <ReservationCard prop={selectedCode[0]} />
                     :
                     <div className="spinner-border text-danger">
                     <span className="sr-only">Devam edin.</span></div>
@@ -55,7 +55,7 @@ const RezervationQuery = ({ rezervation }) => {
 
 const mapStateToProps = (state) => {
     return {
-        rezervation: state.app.selectedRezerve
+        reservation: state.app.selectedReserve
     };
 }
-export default connect(mapStateToProps)(RezervationQuery);
+export default connect(mapStateToProps)(ReservationQuery);

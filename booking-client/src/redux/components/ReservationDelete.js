@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-const RezervationDelete = card => {
+const ReservationDelete = card => {
 
     const [alert, setAlert] = useState(true);
     const history = useHistory();
     console.log(card);
     const _handleDelete = () => {
-        axios.delete('http://localhost:3000/rezervation/api/deleteRezervation/' + card.prop.prop._id)
+        axios.delete('http://localhost:3000/reservation/api/deleteReservation/' + card.prop.prop._id)
             .then((res) => {
-                console.log('Rezervation successfully deleted!')
+                console.log('Reservation successfully deleted!')
                 setAlert(false);
 
             }).catch((error) => {
@@ -34,4 +34,4 @@ const RezervationDelete = card => {
 
         </div>;
 };
-export default RezervationDelete;
+export default ReservationDelete;
