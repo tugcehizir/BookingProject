@@ -10,14 +10,15 @@ import './App.css';
 
 import Header from './redux/components/Header';
 import SearchBar from './redux/components/SearchBar';
-import HotelList from './redux/components/HotelList';
+import HotelList from './redux/components/Other/HotelList';
 import HotelDetail from './redux/components/HotelDetail';
 import NavBar from './redux/components/NavBar';
 import HomePage from './redux/components/HomePage';
 import RezervationForm from './redux/components/RezervationForm';
-import RezervationPage from './redux/components/RezervationPage';
+import RezervationPage from './redux/components/Other/RezervationPage';
 import ThanksPage from './redux/components/ThanksPage';
 import RezervationQuery from './redux/components/RezervationQuery';
+import User from './redux/components/User';
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
           <Route path="/thanks" component={ThanksPage}>
           </Route>
           <Route path="/user">
+            <User />
           </Route>
         </Switch>
       </div>

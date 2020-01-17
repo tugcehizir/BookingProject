@@ -7,7 +7,7 @@ const RezervationQuery = ({ rezervation }) => {
     const dispatch = useDispatch();
 
     const [currentValue, setCurrentValue] = useState("");
-    
+
     let currentCode = useRef();
 
     useEffect(() => {
@@ -39,10 +39,13 @@ const RezervationQuery = ({ rezervation }) => {
         <div className="search">
             <div className="input-group mb-3">
                 <input onChange={handleChange} ref={currentCode} className="form-control" placeholder="Rezervasyon kodunuzu girin." aria-describedby="button-addon2" />
-                <button onClick={handleClick} type="button" class="btn btn-outline-danger">Göster</button>
+                <button onClick={handleClick} type="button" className="btn btn-outline-danger">Göster</button>
                 {selectedCode[0] !== undefined ?
-                <RezervationCard prop={selectedCode[0]} />
-                : <div>OPS!</div>
+                    <RezervationCard prop={selectedCode[0]} />
+                    :
+                    <div className="spinner-border text-danger">
+                    <span className="sr-only">Devam edin.</span></div>
+              
                 }
             </div>
         </div>

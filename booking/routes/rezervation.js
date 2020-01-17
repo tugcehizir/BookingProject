@@ -46,5 +46,31 @@ router.route('/api/createRezervation')
 //             });
 //         });
 // });
+// Update Student
+router.route('/api/updateRezervation/:id')
+.put((req, res, next) => {
+    rezervationModel.findByIdAndUpdate(req.params.id, {
+      $set: req.body
+    }, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.json(data)
+        console.log('Rezervation updated successfully !')
+      }
+    })
+  })
+router.route('/api/deleteRezervation/:id')
+.delete((req, res, next) => {
+    rezervationModel.findByIdAndRemove(req.params.id, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.status(200).json({
+          msg: data
+        })
+      }
+    })
+  })
 
 module.exports = router;

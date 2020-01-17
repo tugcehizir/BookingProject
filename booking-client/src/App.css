@@ -71,10 +71,29 @@ a {
   float: right;
 }
 .card{
-  width: 500px;
+  width: 550px;
   margin: 15px auto;
 }
+.card-body{
+  padding: 20px 10px;
+}
 .alert-success{
-  width: 500px;
+  width: 550px;
   margin: 0 auto;
+}
+.text-danger{
+  margin-left: 10px;
+}
+.btn-outline-dark{
+  margin-left: 10px;
+}
+.alert{
+  width: 550px;
+  margin: 0 auto;
+}
+.del{
+  margin-top: 15px;
+}
+.container-rez{
+  margin-top: 20px;
 }

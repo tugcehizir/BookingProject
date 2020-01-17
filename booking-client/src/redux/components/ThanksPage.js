@@ -29,7 +29,7 @@ const ThanksPage = ({ location }) => {
         }
         fetchData();
     }, []);
-    
+
     return (
         <div>
             {rezervationCheck !== undefined ?
@@ -39,10 +39,8 @@ const ThanksPage = ({ location }) => {
                             <br />
                         <cite>Tekrar görüşmek dileğiyle..</cite>
                     </div>
-                    <RezervationCard prop={rezervationCheck[0]}/>
-                    <div class="alert alert-light" role="alert">
-                        <cite> Rezervasyon kodunuzu lütfen saklayın.</cite>
-                    </div>
+                    <RezervationCard prop={rezervationCheck[0]} />
+
 
                 </div>
                 : <div>LOADING</div>
