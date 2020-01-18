@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Room = require('./Room');
+var User = require('./User');
 
 module.exports = new mongoose.model('Reservation', mongoose.Schema({
   resCode: String,
@@ -21,6 +22,7 @@ module.exports = new mongoose.model('Reservation', mongoose.Schema({
     type: String,
     required: [true, "Kişi sayısı zorunlu."]
   },
+  user:[User.schema],
   room: [Room.schema]
 }));
 

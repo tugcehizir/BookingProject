@@ -8,17 +8,17 @@ import {
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 
-import Header from './redux/components/Header';
-import SearchBar from './redux/components/SearchBar';
-import HotelList from './redux/components/Other/HotelList';
-import HotelDetail from './redux/components/HotelDetail';
-import NavBar from './redux/components/NavBar';
-import HomePage from './redux/components/HomePage';
-import ReservationForm from './redux/components/ReservationForm';
-import ReservationPage from './redux/components/Other/ReservationPage';
-import ThanksPage from './redux/components/ThanksPage';
-import ReservationQuery from './redux/components/ReservationQuery';
-import User from './redux/components/User';
+import Header from './components/Header';
+import SearchBar from './components/SearchBar';
+import HotelList from './components/HotelList';
+import HotelDetail from './components/HotelDetail';
+import NavBar from './components/NavBar';
+import HomePage from './components/Other/HomePage';
+import ReservationForm from './components/ReservationForm';
+import ReservationPage from './components/Other/ReservationPage';
+import ThanksPage from './components/ThanksPage';
+import ReservationQuery from './components/ReservationQuery';
+import User from './components/User';
 
 function App() {
   return (
@@ -49,7 +49,7 @@ function App() {
           </Route>
           <Route path="/thanks" component={ThanksPage}>
           </Route>
-          <Route path="/user">
+          <Route path="/login">
             <User />
           </Route>
         </Switch>

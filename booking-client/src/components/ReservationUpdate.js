@@ -1,76 +1,67 @@
 import React, { useState, useRef } from 'react';
-import { useSelector } from 'react-redux'
-import { withRouter, useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import DatePicker from "react-datepicker"
-import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import uuid from 'react-uuid'
+import { updateReservation } from '../api/reservation'
 
-const ReservationForm = ({ location }) => {
+
+const ReservationUpdate = card => {
+    console.log(card.prop);
+    const [startDate, setStartDate] = useState(new Date(`${card.prop.checkInDate}`));
+    const [endDate, setEndDate] = useState(new Date(`${card.prop.checkOutDate}`));
+
     const history = useHistory();
-
-    const [startDate, setStartDate] = useState(new Date("2020-01-01T00:00:00Z"));
-    const [endDate, setEndDate] = useState(new Date("2020-01-01T00:00:00Z"));
-    const [success, setSuccess] = useState();
-
-    const [data, setdata] = useState();
 
     let userName = useRef();
     let userMail = useRef();
     let phoneNumber = useRef();
     let numberOfPerson = useRef();
 
-    const roomList = useSelector(state => state.app.rooms);
-
-    const selectedRoom = roomList.filter(item => {
-        if (item._id === location.state.roomId) {
-            return true;
-        }
-        return false;
-    });
-
     const [name, setUserName] = useState();
     const [mail, setUserMail] = useState();
     const [phone, setPhone] = useState();
     const [person, setNumberOfPerson] = useState();
 
+    const uniqueCode = uuid();
+    const resCode = uniqueCode.split("-")
+    console.log(resCode[0]);
 
     const handleChange = () => {
         setUserName(userName.current.value);
         setNumberOfPerson(numberOfPerson.current.value);
         setPhone(phoneNumber.current.value);
         setUserMail(userMail.current.value);
-    }
 
+    }
     const handleSubmit = event => {
         event.preventDefault();
-        const uniqueCode = uuid();
-        const resCode = uniqueCode.split("-")
-        axios
-            .post("http://localhost:3000/reservation/api/createReservation", {
-                resCode: resCode[0],
-                checkInDate: startDate,
-                checkOutDate: endDate,
-                userName: name,
-                userMail: mail,
-                phoneNumber: phone,
-                numberOfPerson: person,
-                room: selectedRoom[0]
-            })
-            .then(({ data }) => {
-                setdata(data);
-                setSuccess(true);
+        const data = {
+            id: card.prop._id,
+            resCode: resCode[0],
+            checkInDate: startDate,
+            checkOutDate: endDate,
+            userName: name,
+            userMail: mail,
+            phoneNumber: phone,
+            numberOfPerson: person,
+            room: card.prop.room
+        }
+        updateReservation(data)
+            .then((res) => {
+                console.log(res.data)
+                console.log('Reservation successfully updated')
                 history.push({ pathname: '/thanks', state: { resCode: resCode[0] } });
+            }).catch((error) => {
+                console.log(error)
             })
-            .catch(err => {
-                setSuccess(false);
-                console.log(err);
-            });
-        console.log(data);
+    }
+    const handlerRoute = event => {
+        event.preventDefault();
+        history.push({ pathname: '/' });
     }
     return (
-        <div className="container-rez">
-            <p>Rezervasyon yapmak istediğiniz oda <mark>{selectedRoom[0].name}</mark></p>
+        <div className="container-res">
             <form onSubmit={handleSubmit}>
                 <div className="left">
                     <div className="form-group">
@@ -155,23 +146,10 @@ const ReservationForm = ({ location }) => {
                         />
                     </div>
                 </div>
-                <input type="submit" value="Gönder" />
+                <input type="submit" value="Gönder" className="btn btn-outline-dark" />
+                <button onClick={handlerRoute} type="button" className="btn btn-outline-dark">İptal</button>
             </form>
 
-            <div className="result">
-                {
-                    (success === false)
-                        ? (
-                            <div class="alert alert-danger" role="alert">
-                                Rezervasyon oluşturma hatası!
-                            Lütfen tekrar deneyin!</div>)
-                        : <div></div>
-                }
-            </div>
-
-        </div>
-    )
-
-}
-
-export default withRouter(ReservationForm);
+        </div>)
+};
+export default ReservationUpdate;

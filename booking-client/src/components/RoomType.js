@@ -1,15 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { useHistory, withRouter } from 'react-router-dom';
 
 const RoomType = room => {
+    const dispatch = useDispatch();
     console.log(room);
     const rooms = [room.room];
     const history = useHistory();
     const _onClick = id => {
         console.log("Burası id", id)
-        history.push({ pathname: '/form', state: { roomId: id } }); //Bu fonksiyona verilen path'e yönlendirir.
 
+        dispatch({ type: 'selectedRoom/success', data: id });
+        history.push({ pathname: '/login' });
     }
     return (
         <div>

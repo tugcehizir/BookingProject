@@ -1,40 +1,67 @@
-import React, { useState, useRef } from 'react';
-import { useHistory } from "react-router-dom";
+import React, { useState, useRef, useEffect } from 'react';
+import { withRouter, useHistory } from 'react-router-dom';
 import DatePicker from "react-datepicker"
+import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import uuid from 'react-uuid'
-
-import axios from "axios";
-const ReservationUpdate = card => {
-    console.log(card.prop);
-    const [startDate, setStartDate] = useState(new Date(`${card.prop.checkInDate}`));
-    const [endDate, setEndDate] = useState(new Date(`${card.prop.checkOutDate}`));
-
+import { getReservation, postReservation } from '../api/reservation'
+const ReservationForm = ({ location }) => {
     const history = useHistory();
+
+    const [startDate, setStartDate] = useState(new Date("2020-01-01T00:00:00Z"));
+    const [endDate, setEndDate] = useState(new Date("2020-01-01T00:00:00Z"));
+    const [success, setSuccess] = useState();
+
+    const [data, setdata] = useState();
 
     let userName = useRef();
     let userMail = useRef();
     let phoneNumber = useRef();
     let numberOfPerson = useRef();
 
+    const selectedRoom = location.state.room;
+    const userCode = location.state.userCode;
+
     const [name, setUserName] = useState();
     const [mail, setUserMail] = useState();
     const [phone, setPhone] = useState();
     const [person, setNumberOfPerson] = useState();
 
+    const [users, setUsers] = useState();
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const result = await fetch(`http://localhost:3000/reservation/api/getData`);
+                const res = await result.json();
+                setUsers(res)
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+        fetchData();
+    }, []);
+    console.log(userCode)
+    console.log("usss", users)
+    if (users !== undefined) {
+        var find = users.data.filter(obj => {
+            return userCode === obj.code;
+        });
+    }
 
     const handleChange = () => {
         setUserName(userName.current.value);
+
         setNumberOfPerson(numberOfPerson.current.value);
         setPhone(phoneNumber.current.value);
         setUserMail(userMail.current.value);
     }
-    const handleSubmit = event => {
-        event.preventDefault();
-        const uniqueCode = uuid();
-        const resCode = uniqueCode.split("-")
 
-        axios.put('http://localhost:3000/reservation/api/updateReservation/' + card.prop._id, {
+    const handleSubmit = event => {
+        event.preventDefault(); const uniqueCode = uuid();
+        const resCode = uniqueCode.split("-")
+        const data = {
             resCode: resCode[0],
             checkInDate: startDate,
             checkOutDate: endDate,
@@ -42,22 +69,27 @@ const ReservationUpdate = card => {
             userMail: mail,
             phoneNumber: phone,
             numberOfPerson: person,
-            room: card.prop.room
-        })
-        .then((res) => {
-          console.log(res.data)
-          console.log('Student successfully updated')          
-        history.push({ pathname: '/thanks', state: { resCode: resCode[0] } });
-        }).catch((error) => {
-          console.log(error)
-        })
-    }
-    const handlerRoute = event => {
-        event.preventDefault();
-        history.push({ pathname: '/'});
+            user: find,
+            room: selectedRoom[0]
+        }
+        console.log(find)
+        postReservation(data)
+            .then(({ data }) => {
+                setdata(data);
+                setSuccess(true);
+                history.push({ pathname: '/thanks', state: { resCode: resCode[0] } });
+            })
+            .catch(err => {
+                setSuccess(false);
+                console.log(err);
+            });
+        console.log(data);
     }
     return (
+
         <div className="container-res">
+            {selectedRoom.length > 0 && (<p>Rezervasyon yapmak istediğiniz oda <mark>{selectedRoom[0].name}</mark></p>)}
+
             <form onSubmit={handleSubmit}>
                 <div className="left">
                     <div className="form-group">
@@ -142,10 +174,23 @@ const ReservationUpdate = card => {
                         />
                     </div>
                 </div>
-                <input type="submit" value="Gönder" className="btn btn-outline-dark"/>
-                <button onClick={handlerRoute} type="button" className="btn btn-outline-dark">İptal</button>
+                <input type="submit" value="Gönder" />
             </form>
 
-        </div>)
-};
-export default ReservationUpdate;
+            <div className="result">
+                {
+                    (success === false)
+                        ? (
+                            <div class="alert alert-danger" role="alert">
+                                Rezervasyon oluşturma hatası!
+                            Lütfen tekrar deneyin!</div>)
+                        : <div></div>
+                }
+            </div>
+
+        </div>
+    )
+
+}
+
+export default withRouter(ReservationForm);

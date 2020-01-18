@@ -9,10 +9,7 @@ const NavBar = () => {
                     <a className="nav-link active" href='/'>Ana Sayfa</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href='/reservation'>Rezervasyon İşlemleri</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href='/login'>Üye Girişi</a>
+                    <a className="nav-link" href='/login'>Rezervasyon İşlemleri</a>
                 </li>
             </ul>
         </div>

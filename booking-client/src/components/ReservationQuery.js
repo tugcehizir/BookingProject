@@ -44,8 +44,8 @@ const ReservationQuery = ({ reservation }) => {
                     <ReservationCard prop={selectedCode[0]} />
                     :
                     <div className="spinner-border text-danger">
-                    <span className="sr-only">Devam edin.</span></div>
-              
+                        <span className="sr-only">Devam edin.</span></div>
+
                 }
             </div>
         </div>

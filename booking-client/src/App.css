@@ -97,3 +97,10 @@ a {
 .container-res{
   margin-top: 20px;
 }
+.login-form{  
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: 1.1rem;
+  width: 430px;
+  margin: 10px auto;
+  padding: 1rem;
+}
