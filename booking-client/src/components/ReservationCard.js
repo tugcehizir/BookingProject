@@ -13,7 +13,8 @@ const ReservationCard = card => {
 
     const _handleDelete = () => {
         setDeleteMethod(true);
-        setShowForm(false);
+        setShowForm(false);        
+        setShowCard(false);
     }
     const _handleUpdate = () => {
         setUpdateMethod(true);
@@ -38,7 +39,7 @@ const ReservationCard = card => {
                     </div>
                 </div>
             </div>
-            {deleteMethod ? <div style={{display: showAlert ? 'block' : 'none' }}><ReservationDelete prop={card} /></div> : <div></div>}
+            {deleteMethod ? <div className="dlt" style={{display: showAlert ? 'block' : 'none' }}><ReservationDelete prop={card} /></div> : <div></div>}
             {updateMethod ? <div style={{display: showForm ? 'block' : 'none' }}><ReservationUpdate prop={card.prop} /></div> : <div></div>}
         </div>
     )

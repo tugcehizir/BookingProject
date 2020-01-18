@@ -3,6 +3,8 @@ import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import axios from "axios";
 import uuid from 'react-uuid'
+import NavBar from './NavBar'
+
 const User = () => {
 
     const history = useHistory();
@@ -12,8 +14,9 @@ const User = () => {
     console.log(roomId);
 
     const [name, setUserName] = useState("");
-    const [pass, setPassword] = useState("");    
+    const [pass, setPassword] = useState("");
     const [data, setdata] = useState();
+    const [login, setLogin] = useState(false);
 
     const selectedRoom = roomList.filter(item => {
         if (item._id === roomId) {
@@ -42,12 +45,15 @@ const User = () => {
             })
             .then(({ data }) => {
                 setdata(data);
-                history.push({ pathname: '/form', state: { room: selectedRoom, userCode: userCode[0]}});
+                setLogin(true);
+                history.push({ pathname: '/form', state: { room: selectedRoom, userCode: userCode[0] } });
+
             })
             .catch(err => {
                 console.log(err);
             });
     }
+    console.log(data)
     console.log(`name: ${name} , password ${pass}`);
     return <div>
         <form className="login-form">
@@ -61,6 +67,7 @@ const User = () => {
             </div>
             <button onClick={_handleSubmit} type="submit" className="btn btn-danger">Giriş</button>
         </form>
+        {login ? <NavBar isLogin={true} user={data} /> : <div></div>}
     </div>
 }
 

@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import DatePicker from "react-datepicker"
-import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import uuid from 'react-uuid'
-import { getReservation, postReservation } from '../api/reservation'
+import { postReservation } from '../api/reservation'
+
 const ReservationForm = ({ location }) => {
     const history = useHistory();
 
@@ -12,7 +12,7 @@ const ReservationForm = ({ location }) => {
     const [endDate, setEndDate] = useState(new Date("2020-01-01T00:00:00Z"));
     const [success, setSuccess] = useState();
 
-    const [data, setdata] = useState();
+    const [da, setdata] = useState();
 
     let userName = useRef();
     let userMail = useRef();
@@ -32,7 +32,7 @@ const ReservationForm = ({ location }) => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const result = await fetch(`http://localhost:3000/reservation/api/getData`);
+                const result = await fetch(`http://localhost:3000/user/api/getData`);
                 const res = await result.json();
                 setUsers(res)
             }
@@ -42,17 +42,22 @@ const ReservationForm = ({ location }) => {
         }
         fetchData();
     }, []);
-    console.log(userCode)
-    console.log("usss", users)
+
+    const find = [];
     if (users !== undefined) {
-        var find = users.data.filter(obj => {
-            return userCode === obj.code;
-        });
+        console.log("ussssssss", users.data)
+        users.data.map(obj => {
+            console.log(obj.code)
+            if (obj.code === userCode) {
+                find.push(obj);
+                return obj;
+            }
+            else {return null}
+        })
     }
 
     const handleChange = () => {
         setUserName(userName.current.value);
-
         setNumberOfPerson(numberOfPerson.current.value);
         setPhone(phoneNumber.current.value);
         setUserMail(userMail.current.value);
@@ -72,7 +77,6 @@ const ReservationForm = ({ location }) => {
             user: find,
             room: selectedRoom[0]
         }
-        console.log(find)
         postReservation(data)
             .then(({ data }) => {
                 setdata(data);
@@ -83,8 +87,9 @@ const ReservationForm = ({ location }) => {
                 setSuccess(false);
                 console.log(err);
             });
-        console.log(data);
     }
+    
+    console.log(da);
     return (
 
         <div className="container-res">
