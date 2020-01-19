@@ -5,12 +5,12 @@ const Star = props => {
     const star = [];
     for (let i = 0; i < number; i++) {
         star.push(
-        <img className="stars" alt="yıldız" src="https://cdn2.iconfinder.com/data/icons/modifiers-add-on-1-flat/48/Mod_Add-On_1-35-512.png" />)
+            <img className="stars" alt="yıldız" key={i} src="https://cdn2.iconfinder.com/data/icons/modifiers-add-on-1-flat/48/Mod_Add-On_1-35-512.png" />)
     }
     return (
         <div>
             {star}
-        </div> 
+        </div>
     );
 }
 export default Star;

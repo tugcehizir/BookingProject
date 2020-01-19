@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import ReservationDelete from "./ReservationDelete";
 import ReservationUpdate from "./ReservationUpdate";
-
 import { withRouter } from 'react-router-dom';
 const ReservationCard = card => {
     console.log(card.prop)
@@ -13,7 +12,7 @@ const ReservationCard = card => {
 
     const _handleDelete = () => {
         setDeleteMethod(true);
-        setShowForm(false);        
+        setShowForm(false);
         setShowCard(false);
     }
     const _handleUpdate = () => {
@@ -26,10 +25,9 @@ const ReservationCard = card => {
     console.log(updateMethod);
     return (
         <div className="card-cont" >
-            <div className="card" style={{display: showCard ? 'block' : 'none' }}>
+            <div className="card" style={{ display: showCard ? 'block' : 'none' }}>
                 <div className="card-body">
                     <h5 className="card-title">Rezervasyon Kodu: {card.prop.resCode}</h5>
-
                     <h6 className="card-subtitle mb-2 text-muted">Rezervasyon Sahibi: {card.prop.userName}</h6>
                     <p className="card-text">Kişi Sayısı: {card.prop.numberOfPerson}</p>
                     <button onClick={_handleUpdate} className="btn btn-outline-dark">Düzenle</button>
@@ -39,8 +37,8 @@ const ReservationCard = card => {
                     </div>
                 </div>
             </div>
-            {deleteMethod ? <div className="dlt" style={{display: showAlert ? 'block' : 'none' }}><ReservationDelete prop={card} /></div> : <div></div>}
-            {updateMethod ? <div style={{display: showForm ? 'block' : 'none' }}><ReservationUpdate prop={card.prop} /></div> : <div></div>}
+            {deleteMethod ? <div className="dlt" style={{ display: showAlert ? 'block' : 'none' }}><ReservationDelete prop={card} /></div> : <div></div>}
+            {updateMethod ? <div style={{ display: showForm ? 'block' : 'none' }}><ReservationUpdate prop={card.prop} /></div> : <div></div>}
         </div>
     )
 

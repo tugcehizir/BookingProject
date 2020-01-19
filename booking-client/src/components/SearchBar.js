@@ -14,6 +14,7 @@ const SearchBar = ({ hotels }) => {
                 const res = await result.json();
 
                 dispatch({ type: 'hotel/success', data: res.data });
+                dispatch({ type: 'selectedHotel/success', data: res.data });
             }
             catch (error) {
                 console.log(error);
@@ -29,6 +30,7 @@ const SearchBar = ({ hotels }) => {
             return hotels.country === currentSelect;
         });
         console.log(selectedHotels);
+
         dispatch({ type: 'selectedHotel/success', data: selectedHotels });
 
     };
@@ -59,11 +61,13 @@ const SearchBar = ({ hotels }) => {
     }
 
     return (
-        <div className="search">
-            <div className="input-group mb-3">
-                <input onChange={_handleChange} className="form-control" placeholder="Hangi ülkeyi ziyaret etmek istersiniz?" aria-describedby="button-addon2" />
+        <>
+            <div className="search">
+                <div className="input-group mb-3">
+                    <input onChange={_handleChange} className="form-control" placeholder="Hangi ülkeyi ziyaret etmek istersiniz?" aria-describedby="button-addon2" />
+                </div>
             </div>
-        </div>
+        </>
     )
 
 }

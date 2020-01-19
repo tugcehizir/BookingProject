@@ -14,9 +14,13 @@ const NavBar = (prop) => {
                 <li className="nav-item">
                     <a className="nav-link" href='/reservation'>Rezervasyonlarım</a>
                 </li>
-                <li className="nav-item">
-                    <a className="nav-link" href='/login'>Giriş</a>
-                </li>
+                {prop.isLogin ?
+                    <li className="nav-item">
+                        <a className="nav-link" href='/login'>Giriş</a>
+                    </li>
+                    : <li className="nav-item">
+                        <a className="nav-link" href='/login'>Çıkış</a>
+                    </li>}
             </ul>
         </div>
     )

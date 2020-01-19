@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, useHistory } from 'react-router-dom';
-
+import Star from './Star';
 const HotelList = ({ selectedCountry }) => {
     const history = useHistory();
     const _onClick = id => {
@@ -18,6 +18,7 @@ const HotelList = ({ selectedCountry }) => {
                         </div>
                         <div className="col-md-8">
                             <div className="card-body">
+                                <span className="stars"> <Star number={item.star} /></span>
                                 <h5 className="card-title">{item.name}</h5>
                                 <p className="card-text">{item.info}</p>
                                 <p className="card-text"><small className="text-muted">{item.country}</small></p>

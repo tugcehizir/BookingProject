@@ -19,6 +19,7 @@ import ReservationPage from './components/Other/ReservationPage';
 import ThanksPage from './components/ThanksPage';
 import ReservationQuery from './components/ReservationQuery';
 import User from './components/User';
+import HotelFilter from './components/HotelFilter';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Header name={'Booking Clone'} />
+            <HotelFilter />
             <SearchBar />
             <HotelList />
           </Route>

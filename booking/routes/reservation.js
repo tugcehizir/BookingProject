@@ -4,29 +4,27 @@ var router = express.Router();
 var reservationModel = require('../model/Reservation');
 
 router.route('/api/getData')
-    .get(function (req, res, next) {
-        reservationModel.find({})
-            .then((data) => {
-                res.status(200).json({
-                    status: 200,
-                    message: "Başarılı",
-                    data: data
-                })
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-
-    })
+  .get(function (req, res, next) {
+    reservationModel.find({})
+      .then((data) => {
+        res.status(200).json({
+          status: 200,
+          message: "Başarılı",
+          data: data
+        })
+      }).catch((err) => {
+        console.log(err);
+      })
+  })
 
 router.route('/api/createReservation')
-    .post(function (req, res, next) {
-        reservationModel.create(req.body, (err, data) => {
-            console.log(data);
-            console.log(err);
-        })
-        res.status(201).json(req.body);
+  .post(function (req, res, next) {
+    reservationModel.create(req.body, (err, data) => {
+      console.log(data);
+      console.log(err);
     })
+    res.status(201).json(req.body);
+  })
 // router.post("/api/createReservation", (request, response, next) => {
 //     const reservation = Reservation(request.body);
 //     reservation.save()
@@ -48,7 +46,7 @@ router.route('/api/createReservation')
 // });
 // Update Student
 router.route('/api/updateReservation/:id')
-.put((req, res, next) => {
+  .put((req, res, next) => {
     reservationModel.findByIdAndUpdate(req.params.id, {
       $set: req.body
     }, (error, data) => {
@@ -61,7 +59,7 @@ router.route('/api/updateReservation/:id')
     })
   })
 router.route('/api/deleteReservation/:id')
-.delete((req, res, next) => {
+  .delete((req, res, next) => {
     reservationModel.findByIdAndRemove(req.params.id, (error, data) => {
       if (error) {
         return next(error);
